@@ -4,9 +4,13 @@ mod commands;
 fn main() {
     let args = cli::parse();
 
-    println!("{:?}", args);
+    if args.logo {
+        commands::print_logo();
+    }
 
     match args.command {
-        cli::Commands::Status => commands::status::fn_status(),
+        cli::Commands::Status => commands::status::run(),
+        cli::Commands::Apply(i) => commands::apply::run(i),
+        cli::Commands::Delete(i) => commands::delete::run(i),
     }
 }
